@@ -1,0 +1,57 @@
+스프링 웹 MVC 4부: 정적 리소스 지원
+
+정적으로 이미 존재하는 리소스 요청시 제공
+
+정적 리소스 맵핑 “/**”
+
+● 기본 리소스 위치
+
+○ classpath:/static
+
+○ classpath:/public
+
+○ classpath:/resources/
+
+○ classpath:/META-INF/resources
+
+---
+
+○ spring.mvc.static-path-pattern: 맵핑 설정 변경 가능
+
+properties file에 spring.mvc.static-path-pattern=/static/**
+
+○ 예) “/hello.html” => /static/hello.html
+
+
+---
+
+○ spring.mvc.static-locations: 리소스 찾을 위치 변경 가능
+
+● Last-Modified 헤더를 보고 304 응답을 보냄.
+
+Last-Modified를 보고 변경 있으면 새로 전송, 변경 없으면 새로 전송 X -> 따라서 조금 더 빨라진다
+
+
+● ResourceHttpRequestHandler가 처리함.
+
+○ WebMvcConfigurer의 addRersourceHandlers로 커스터마
+이징 할 수 있음
+
+```
+@Override
+
+public void 
+addResourceHandlers(ResourceHandlerRegistry 
+registry) {
+
+registry.addResourceHandler("/m/**")
+
+.addResourceLocations("classpath:/m/")
+
+.setCachePeriod(20);
+```
+
+
+
+
+

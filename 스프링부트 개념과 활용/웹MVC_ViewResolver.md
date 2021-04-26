@@ -1,0 +1,36 @@
+스프링 웹 MVC 3부: ViewResolver
+
+스프링 부트
+
+● 뷰 리졸버 설정 제공
+
+● HttpMessageConvertersAutoConfiguration
+
+
+들어오는 요청의 accept 헤더에 따라 응답이 달라진다
+
+사용자의 요청에 응답할 수 있는 view들중에서 알맞은 view를 선택하는 가장 중요한 정보는 accept
+
+accept를 지원하지 않는경우를 대비하여 파라미터 값으로 (?format=pdf)으로 넘겨받을 수 있다
+
+HttpMessageConvertersAutoConfiguration 의 자동설정에 의해 여러 타입의 컨버터들을 사용할 수 있는데, 의존성을 따로 추가해줘야 하는 경우도 있다.
+
+```
+@ConditionalOnClass({XmlMapper.class})
+    @ConditionalOnBean({Jackson2ObjectMapperBuilder.class})
+    protected static class MappingJackson2XmlHttpMessageConverterConfiguration {
+        protected MappingJackson2XmlHttpMessageConverterConfiguration() {
+        }
+```
+
+JSON to Xml 컨버터 같은 경우 XmlMapper.class가 존재하는 경우에만 작동하는 것을 볼 수있다. 따라서 의존성을 따로 추가하여 주어야 한다.     
+
+XML 메시지 컨버터 추가하기
+
+```
+<dependency>
+<groupId>com.fasterxml.jackson.dataformat</groupId>
+<artifactId>jackson-dataformat-xml</artifactId>
+<version>2.9.6</version>
+</dependency>
+```

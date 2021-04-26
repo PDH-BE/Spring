@@ -1,0 +1,26 @@
+스프링 웹 MVC 5부: 웹JAR
+
+웹 JAR이란?
+
+클라이언트에서 사용하는 Reactjs, Angularjs, vuejs, jquery 등을 
+JAR 파일로 스프링부트에 추가해 줄 수 있다.
+
+그 JAR 파일에 있는 css나 java script를 참조할 수 있다.
+
+웹JAR 맵핑 “/webjars/**”
+
+```
+<script src="/webjars/jquery/dist/jquery.min.js"></script>
+<script>
+$(function() {
+console.log("ready!");
+});
+</script>
+```
+
+jquery 의존성 추가 후 해당 코드 실행하면 jquery가 동작
+
+
+
+
+● 버전 생략하고 사용하려면 webjars-locator-core 의존성 추가
